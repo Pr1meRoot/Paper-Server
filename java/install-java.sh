@@ -2,11 +2,14 @@
 
 JAVA_VERSION="$1" # Получает требуемую версию Java
 
-echo "Checking Java $JAVA_VERSION..." # Сообщает, какую Java проверяем
+echo "Checking Java $JAVA_VERSION..." # Показывает, какую Java проверяем
 
-if java -version 2>&1 | grep -q "\"$JAVA_VERSION\""; then # Проверяет, установлена ли нужная версия Java
-    echo "Java $JAVA_VERSION is already installed." # Сообщает, что нужная Java уже есть
-else # Выполняется, если нужной Java нет
-    echo "Java $JAVA_VERSION is not installed." # Сообщает, что Java отсутствует
-    echo "Java installation will be added here." # Временно показывает место для установки Java
+if java -version 2>&1 | grep -q 'version "21'; then # Проверяет, установлена ли Java 21
+    echo "Java 21 is already installed." # Сообщает, что Java 21 уже есть
+else # Выполняется, если Java 21 отсутствует
+    echo "Java 21 is not installed. Installing..." # Сообщает о начале установки
+    sudo apt update # Обновляет список пакетов
+    sudo apt install -y openjdk-21-jdk # Устанавливает Java 21
 fi # Завершает проверку Java
+
+java -version # Показывает установленную версию Java
