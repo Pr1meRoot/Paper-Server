@@ -1,4 +1,4 @@
-#!/bin/bash # Запускает скрипт через Bash
+#!/bin/bash
 
 JAVA_VERSION="$1" # Получает требуемую версию Java
 
