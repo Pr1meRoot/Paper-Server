@@ -2,76 +2,23 @@
 
 source /etc/os-release # Загружает информацию о Linux-дистрибутиве
 
-echo "================================" # Выводит верхнюю границу меню
-echo " Minecraft Paper Server Setup" # Показывает название установщика
-echo "================================" # Выводит нижнюю границу заголовка
-echo "" # Добавляет пустую строку
+MC_VERSION="1.21.1" # Устанавливает фиксированную версию Minecraft
+JAVA_VERSION="21" # Устанавливает требуемую версию Java
 
-echo "Select Minecraft version:" # Показывает пользователю меню выбора версии
-echo "" # Добавляет пустую строку
-echo "1) Minecraft 1.8.8  - Java 8" # Показывает первую версию и требуемую Java
-echo "2) Minecraft 1.12.2 - Java 11" # Показывает вторую версию и требуемую Java
-echo "3) Minecraft 1.16.5 - Java 16" # Показывает третью версию и требуемую Java
-echo "4) Minecraft 1.20.1 - Java 21" # Показывает четвёртую версию и требуемую Java
-echo "5) Minecraft 1.21.1 - Java 21" # Показывает пятую версию и требуемую Java
-echo "6) Minecraft 26.1   - Java 25" # Показывает шестую версию и требуемую Java
-echo "" # Добавляет пустую строку
+echo "Minecraft: $MC_VERSION" # Показывает версию Minecraft
+echo "Required Java: $JAVA_VERSION" # Показывает требуемую версию Java
 
-read -p "Enter your choice [1-6]: " CHOICE # Получает выбор пользователя
-
-case "$CHOICE" in # Проверяет выбранный пользователем вариант
-    1) # Обрабатывает выбор Minecraft 1.8.8
-        MC_VERSION="1.8.8" # Сохраняет выбранную версию Minecraft
-        JAVA_VERSION="8" # Устанавливает требуемую версию Java
-        ;; # Завершает этот вариант
-
-    2) # Обрабатывает выбор Minecraft 1.12.2
-        MC_VERSION="1.12.2" # Сохраняет выбранную версию Minecraft
-        JAVA_VERSION="11" # Устанавливает требуемую версию Java
-        ;; # Завершает этот вариант
-
-    3) # Обрабатывает выбор Minecraft 1.16.5
-        MC_VERSION="1.16.5" # Сохраняет выбранную версию Minecraft
-        JAVA_VERSION="16" # Устанавливает требуемую версию Java
-        ;; # Завершает этот вариант
-
-    4) # Обрабатывает выбор Minecraft 1.20.1
-        MC_VERSION="1.20.1" # Сохраняет выбранную версию Minecraft
-        JAVA_VERSION="21" # Устанавливает требуемую версию Java
-        ;; # Завершает этот вариант
-
-    5) # Обрабатывает выбор Minecraft 1.21.1
-        MC_VERSION="1.21.1" # Сохраняет выбранную версию Minecraft
-        JAVA_VERSION="21" # Устанавливает требуемую версию Java
-        ;; # Завершает этот вариант
-
-    6) # Обрабатывает выбор Minecraft 26.1
-        MC_VERSION="26.1" # Сохраняет выбранную версию Minecraft
-        JAVA_VERSION="25" # Устанавливает требуемую версию Java
-        ;; # Завершает этот вариант
-
-    *) # Обрабатывает неправильный выбор
-        echo "Invalid choice." # Сообщает пользователю о неправильном выборе
-        exit 1 # Завершает скрипт с ошибкой
-        ;; # Завершает этот вариант
-esac # Завершает обработку выбора
-
-echo "" # Добавляет пустую строку
-echo "Minecraft version: $MC_VERSION" # Показывает выбранную версию Minecraft
-echo "Required Java version: $JAVA_VERSION" # Показывает требуемую версию Java
-echo "" # Добавляет пустую строку
-
-case "$ID" in # Проверяет текущий Linux-дистрибутив
-    debian) # Обрабатывает Debian
-        bash scripts/debian.sh "$MC_VERSION" "$JAVA_VERSION" # Запускает Debian-скрипт и передаёт версии
+case "$ID" in # Проверяет дистрибутив Linux
+    debian) # Если используется Debian
+        bash scripts/debian.sh "$MC_VERSION" "$JAVA_VERSION" # Запускает установщик Debian
         ;; # Завершает вариант Debian
 
-    ubuntu) # Обрабатывает Ubuntu
-        bash scripts/ubuntu.sh "$MC_VERSION" "$JAVA_VERSION" # Запускает Ubuntu-скрипт и передаёт версии
+    ubuntu) # Если используется Ubuntu
+        bash scripts/ubuntu.sh "$MC_VERSION" "$JAVA_VERSION" # Запускает установщик Ubuntu
         ;; # Завершает вариант Ubuntu
 
-    *) # Обрабатывает неподдерживаемый Linux
-        echo "Unsupported distribution: $ID" # Показывает название неподдерживаемого дистрибутива
+    *) # Если дистрибутив не поддерживается
+        echo "Unsupported distribution: $ID" # Показывает неподдерживаемый дистрибутив
         exit 1 # Завершает скрипт с ошибкой
         ;; # Завершает вариант ошибки
 esac # Завершает проверку дистрибутива
