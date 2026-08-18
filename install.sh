@@ -1,4 +1,4 @@
-#!/bin/bash # Запускает скрипт через Bash
+#!/bin/bash
 
 source /etc/os-release # Загружает информацию о Linux-дистрибутиве
 
