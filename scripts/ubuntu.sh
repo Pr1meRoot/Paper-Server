@@ -1,11 +1,19 @@
 #!/bin/bash # Запускает скрипт через Bash
 
-echo "Ubuntu detected." # Сообщает, что выбран установщик для Ubuntu
+MC_VERSION="$1" # Получает версию Minecraft
 
-echo "Checking Java..." # Сообщает пользователю, что начинается проверка Java
+JAVA_VERSION="$2" # Получает требуемую версию Java
 
-if command -v java >/dev/null 2>&1; then # Проверяет, установлена ли команда Java в системе
-    echo "Java is installed." # Сообщает, что Java найдена
-else # Выполняется, если Java не найдена
-    echo "Java is not installed." # Сообщает, что Java отсутствует
-fi # Завершает проверку наличия Java
+echo "Ubuntu detected." # Показывает обнаруженный дистрибутив
+
+echo "Minecraft version: $MC_VERSION" # Показывает выбранную версию Minecraft
+
+echo "Required Java: $JAVA_VERSION" # Показывает требуемую версию Java
+
+bash java/install-java.sh "$JAVA_VERSION" # Передаёт установку Java отдельному скрипту
+
+echo "Java setup completed." # Сообщает, что этап Java завершён
+
+echo "Starting Paper installation..." # Переходит к следующему этапу
+
+bash scripts/install-paper.sh "$MC_VERSION" # Запускает установку Paper и передаёт версию Minecraft
