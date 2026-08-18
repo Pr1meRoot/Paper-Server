@@ -1,4 +1,4 @@
-#!/bin/bash # Запускает скрипт через Bash
+#!/bin/bash
 
 MC_VERSION="$1" # Получает версию Minecraft
 
