@@ -2,12 +2,20 @@
 
 MC_VERSION="$1" # Получает версию Minecraft
 
-JAVA_VERSION="$2" # Получает версию Java
+JAVA_VERSION="$2" # Получает требуемую версию Java
 
-echo "Debian detected." # Показывает обнаруженный Debian
+echo "Debian detected." # Сообщает, что обнаружен Debian
 
-bash java/install-java.sh "$JAVA_VERSION" # Запускает установку Java 21
+bash java/install-java.sh "$JAVA_VERSION" # Запускает установщик Java
 
-echo "Java setup completed." # Сообщает о завершении установки Java
+if [ $? -ne 0 ]; then # Проверяет, завершилась ли установка Java успешно
 
-bash scripts/install-paper.sh "$MC_VERSION" # Переходит к установке Paper
+    echo "Java setup failed." # Сообщает об ошибке Java
+
+    exit 1 # Останавливает установку
+
+fi # Завершает проверку Java
+
+echo "Java setup completed." # Сообщает о завершении настройки Java
+
+bash Paper/install-paper.sh "$MC_VERSION" # Запускает установку Paper
