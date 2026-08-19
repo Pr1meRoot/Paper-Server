@@ -1,8 +1,8 @@
-# Minecraft Paper Server Installer
+# Paper (Minecraft) Server — автоматический установщик
 
-Automatic installer for a Minecraft Paper 1.21.1 server on Debian and Ubuntu.
+Автоматическая установка и базовая настройка сервера Paper (Minecraft) версии 1.21.1 для Debian и Ubuntu.
 
-The project automatically detects the Linux distribution, installs Java 21 if necessary, downloads Paper for Minecraft 1.21.1, creates the server directory and starts the server.
+Проект автоматически определяет дистрибутив Linux, при необходимости устанавливает Java 21, скачивает Paper 1.21.1, создаёт каталог сервера и запускает сервер. Рекомендуется использовать в тестовой среде и внимательно читать разделы безопасности перед использованием в продакшене.
 
 ## Features
 
@@ -10,15 +10,14 @@ The project automatically detects the Linux distribution, installs Java 21 if ne
 - Automatic Java 21 installation
 - Automatic Paper 1.21.1 download
 - Automatic server directory creation
-- Minecraft EULA confirmation
-- Automatic server startup
-- One-command installation
+- Minecraft EULA confirmation (can be automated with a flag)
+- Automatic server startup (recommended to convert to systemd unit)
 
 ## Requirements
 
 - Debian or Ubuntu
 - Internet connection
-- sudo privileges
+- sudo privileges (only for package installation)
 - amd64 system
 - At least 2 GB of available RAM
 
